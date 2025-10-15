@@ -117,9 +117,14 @@ fi
 
 # ------------------ Clon Odoo ------------------
 echo -e "\n==> Clonando Odoo..."
+# Limpiar carpeta
 rm -rf "$OE_HOME_EXT"
+
+# Crear carpeta y asignar permisos al usuario
 mkdir -p "$OE_HOME_EXT"
-chown -R "$OE_USER":"$OE_USER" "$OE_HOME"
+chown -R "$OE_USER":"$OE_USER" "$OE_HOME_EXT"
+
+# Clonar con el usuario correcto
 sudo -u "$OE_USER" git clone --depth 1 --branch "$OE_GIT_BRANCH" https://github.com/odoo/odoo.git "$OE_HOME_EXT"
 
 # ------------------ virtualenv ------------------
@@ -311,5 +316,4 @@ if [ "$GENERATE_RANDOM_PASS" = "True" ]; then
   echo "   GUARDA ESTA CONTRASEÑA EN LUGAR SEGURO."
 fi
 echo "========================================"
-
 
